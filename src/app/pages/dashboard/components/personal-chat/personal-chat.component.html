@@ -1,0 +1,12 @@
+<div class="">
+    <header class="chat-header">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+           <div class="container-fluid">
+               <a class="navbar-brand" href="#">Personal-Chat</a>
+               <button (click)="toggle()" [ngClass]="{'btn-primary': !isActive, 'btn-success': isActive}" class="btn" type="button">
+                   {{ isActive ? 'ChatGTP' : 'Personal chat' }}
+                 </button>
+           </div>
+       </nav>
+     </header>
+</div>

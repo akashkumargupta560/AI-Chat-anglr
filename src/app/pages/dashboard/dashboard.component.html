@@ -1,0 +1,81 @@
+<div class="dashboard-page">
+    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AI Chat</a>
+            <web-toggle-button [on]="false" [showLabels]="true" leftText="On" rightText="Off" (changed)="checked=$event"></web-toggle-button>
+            <button (click)="toggle()" [ngClass]="{'btn-primary': !isActive, 'btn-success': isActive}" class="btn" type="button">
+                {{ isActive ? 'ChatGTP' : 'Personal chat' }}
+              </button>
+        </div>
+    </nav>-->
+    <!--<div class="chat-section">
+        <div *ngIf="result">
+            <h2>Response:</h2>
+            <pre>{{ result | json }}</pre>
+          </div>
+        <div class="search-section">
+            <form [formGroup]="aiForm" (ngSubmit)="onSubmit()">
+            <div class="text-field">
+                <input class="form-control" type="text" placeholder="Default input" formControlName="query">
+                <a href="" class="send-icon">
+                    <button type="submit" [disabled]="aiForm.invalid"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+                </a>
+            </div>
+        </form>
+        <footer>
+
+          <form [formGroup]="aiForm" (ngSubmit)="onSubmit()">
+              <div class="text-field">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Default input"
+                  formControlName="aiValues"
+                  [(ngModel)]="input"
+                />
+                <button type="submit" [disabled]="aiForm.invalid">
+                  <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </form>
+        </footer>
+        </div>
+    </div> -->
+
+  <header class="chat-header">
+     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AI Chat</a>
+            <button (click)="toggle()" [ngClass]="{'btn-primary': !isActive, 'btn-success': isActive}" class="btn" type="button">
+                {{ isActive ? 'ChatGTP' : 'Personal chat' }}
+              </button>
+        </div>
+    </nav>
+  </header>
+  <div class="chat-section">
+    <main class="chat-history">
+      <ng-container *ngFor="let items of chatHistory; let last = last">
+        <div class="messages alert " role="alert" [ngClass]="{'alert-primary':items.from === 'user', 'alert-success':items.from === 'bot'}">
+          <i class="fa" [ngClass]="{'fa-user-circle':items.from === 'user','fa-graduation-cap':items.from === 'bot'}"></i>&nbsp;
+         <!-- <span class="response" [innerHtml]="formatText(items.message)">{{items.message.name}}</span>   -->
+         <span class="response">{{ formatText(items.message) }}</span> 
+          <br *ngIf="!last" />                                 
+        </div>
+      </ng-container>
+    
+      <ng-container *ngIf="loading">
+        <web-chat-ai></web-chat-ai>
+        <!-- <ngx-spinner size="medium" [type]="typeSelected"></ngx-spinner> -->
+      </ng-container>
+    </main>
+    <footer class="chat-input">
+        <div class="text-field">
+          <input class="form-control" (keyup.enter)="sendData()" type="text" placeholder="Text Your Message!"
+            [(ngModel)]="promt" [disabled]="loading"/>
+        </div>
+        <button type="submit" (click)="sendData()"  [disabled]="loading" class="ai-botton">
+          <i class="fa fa-arrow-circle-right chat-button" aria-hidden="true"></i>
+        </button>
+    </footer>
+  </div>
+</div>
